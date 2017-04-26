@@ -17,3 +17,11 @@ body,
     padding: 5px;
     border-radius: 6px;
 }
+
+#logo {
+    position: absolute;
+    z-index: 999;
+    bottom: 20px;
+    left: 5px;
+    width: 200px
+}
