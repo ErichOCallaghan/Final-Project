@@ -34,5 +34,10 @@ require([
         url: "https://services1.arcgis.com/fBc8EJBxQRMcHlei/ArcGIS/rest/services/RockyMountainNP_Boundary/FeatureServer/0"
     });
     map.add(RMNPboundary);
+    
+    var CubLakeTrail = new FeatureLayer({
+        url: "http://services.arcgis.com/YseQBnl2jq0lrUV5/arcgis/rest/services/CubLakeTrail/FeatureServer"
+    });
+    map.add(CubLakeTrail);
 
 });
