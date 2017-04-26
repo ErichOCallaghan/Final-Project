@@ -6,6 +6,20 @@ body,
     height: 100%;
 }
 
+#title {
+    position: absolute;
+    z-index: 999;
+    top: 10px;
+    left: 40%;
+    background-color: rgba(0, 140, 255, 0.6);
+    font-family: Arial;
+    color: white;
+    text-align: center;
+    font-size: 18px;
+    padding: 5px;
+    border-radius: 6px;
+}
+
 #header {
     position: absolute;
     z-index: 999;
