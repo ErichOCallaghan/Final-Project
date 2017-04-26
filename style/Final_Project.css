@@ -9,11 +9,11 @@ body,
 #header {
     position: absolute;
     z-index: 999;
-    top: 5px;
+    bottom: 20px;
     right: 5px;
-    background-color: rgba(0, 140, 255, 0.5);
+    background-color: rgba(0, 140, 255, 0.6);
     font-family: Arial;
-    font-size: 24px;
+    font-size: 16px;
     padding: 5px;
     border-radius: 6px;
 }
