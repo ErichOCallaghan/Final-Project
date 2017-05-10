@@ -1,11 +1,11 @@
 require([
-      "esri/Map",
-      "esri/views/SceneView",
-      "esri/widgets/BasemapToggle",
-      "esri/layers/FeatureLayer",
-      "esri/tasks/Locator",
-      "dojo/domReady!"
-    ], function (Map, SceneView, BasemapToggle, FeatureLayer, Locator) {
+    "esri/Map",
+    "esri/views/SceneView",
+    "esri/widgets/BasemapToggle",
+    "esri/layers/FeatureLayer",
+    "esri/tasks/Locator",
+    "dojo/domReady!"
+], function (Map, SceneView, BasemapToggle, FeatureLayer, Locator) {
 
     var map = new Map({
         basemap: "hybrid"
@@ -14,8 +14,8 @@ require([
     var view = new SceneView({
         container: "viewDiv",
         map: map,
-        center: [-101.17, 21, 78],
-        scale: 50000000
+        center: [-105.55, 40.35],
+        scale: 250000
     });
 
     var basemapToggle = new BasemapToggle({
@@ -46,28 +46,31 @@ require([
     });
 
     view.on("click", function (event) {
-        // Get the coordinates of the click on the view
-        var lat = Math.round(event.mapPoint.latitude * 1000) / 1000;
-        var lon = Math.round(event.mapPoint.longitude * 1000) / 1000;
-
-        view.popup.open({
-            // Set the popup's title to the coordinates of the location
-            title: "Reverse geocode: [" + lon + ", " + lat + "]",
-            location: event.mapPoint // Set the location of the popup to the clicked location
-        });
 
         // Display the popup
         // Execute a reverse geocode using the clicked location
-        locatorTask.locationToAddress(event.mapPoint).then(function (
-            response) {
+        locatorTask.locationToAddress(event.mapPoint).then(function (response) {
+            // Get the coordinates of the click on the view
+            var lat = Math.round(event.mapPoint.latitude * 1000) / 1000;
+            var lon = Math.round(event.mapPoint.longitude * 1000) / 1000;
             // If an address is successfully found, print it to the popup's content
             var address = response.address.Match_addr;
-            view.popup.content = address;
+            //view.popup.content = address;
+            view.popup.open({
+                // Set the popup's title to the coordinates of the location
+                title: "Reverse geocode: [" + lon + ", " + lat + "]",
+                content: address,
+                location: event.mapPoint // Set the location of the popup to the clicked location
+            });
         }).otherwise(function (err) {
             // If the promise fails and no result is found, print a generic message
             // to the popup's content
-            view.popup.content =
-                "No address was found for this location";
+            view.popup.open({
+                // Set the popup's title to the coordinates of the location
+                title: "Error",
+                content: "No address was found for this location",
+                location: event.mapPoint
+            });
         });
     });
 
